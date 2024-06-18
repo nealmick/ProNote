@@ -1,0 +1,93 @@
+:root {
+    --background-color: #fff;
+    --navbar-color: #d1d1d1;
+    --text-color: #333;
+    --link-color: #256efd;
+    --odd-row-bg: rgba(230, 230, 230, 0.8);
+    --even-row-bg: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] {
+    --background-color: #333;
+    --navbar-color: #535353;
+    --text-color: #fff;
+    --link-color: #256efd;
+    --even-row-bg: #333;
+    --odd-row-bg: rgba(255, 255, 255, 0.05);
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.clickable-row {
+    cursor: pointer;
+}
+
+
+a {
+    color: var(--link-color);
+}
+.navbar-toggler i {
+    color: var(--text-color);
+}
+
+tr,
+td,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--text-color);
+}
+
+.navbar a,
+.navbar span {
+    color: var(--text-color) !important;
+    font-weight: bold;
+}
+
+/* Specific selectors for table rows in dark mode */
+table.table-striped tbody tr:nth-of-type(odd) {
+    background-color: var(--odd-row-bg) !important;
+}
+
+table.table-striped tbody tr:nth-of-type(even) {
+    background-color: var(--even-row-bg) !important;
+}
+
+.fixed-bottom-right {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+.btn-dark {
+    width: 250px !important;
+}
+
+.navbar {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.container {
+    margin-top: 10vh;
+}
+@media (max-width: 768px) {
+    .note-content {
+        display: none;
+    }
+}
+
+.selector-container {
+    display: flex;
+    justify-content: start;
+    gap: 10px; /* Spacing between dropdowns */
+}
+
+.selector-container select {
+    width: auto; /* Only take as much width as needed */
+}

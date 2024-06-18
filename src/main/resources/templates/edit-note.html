@@ -1,0 +1,62 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Note</title>
+    <th:block th:replace="~{base :: head}"></th:block>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+    <div th:replace="~{base :: header}"></div>
+    <div class="container">
+        <h1 style="margin-top: 125px">Edit Note</h1>
+        <div class="d-flex justify-content-between mb-3">
+            <a th:href="@{/notes}" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> Back</a>
+            <button type="submit" form="note-form" class="btn btn-primary"><i class="fa-duotone fa-cloud-arrow-up"></i> Save</button>
+        </div>
+        <form id="note-form" th:action="@{/notes/{id}(id=${note.id})}" method="post">
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" class="form-control" th:value="${note.title}" required />
+            </div>
+            <div class="form-group">
+                <label for="content">Content:</label>
+                <div id="editor" style="height: 55vh">${note.content}</div>
+                <textarea id="content" name="content" class="form-control" rows="23" th:text="${note.content}" required style="display: none"></textarea>
+            </div>
+            <div class="selector-container mb-3">
+                <select id="theme-selector" class="form-control">
+                    <option value="ace/theme/monokai">Monokai</option>
+                    <option value="ace/theme/github">GitHub</option>
+                    <option value="ace/theme/tomorrow">Tomorrow</option>
+                    <option value="ace/theme/kuroir">Kuroir</option>
+                    <option value="ace/theme/twilight">Twilight</option>
+                    <option value="ace/theme/xcode">Xcode</option>
+                    <option value="ace/theme/textmate">Textmate</option>
+                    <option value="ace/theme/solarized_dark">Solarized Dark</option>
+                    <option value="ace/theme/solarized_light">Solarized Light</option>
+                </select>
+                <select id="language-selector" class="form-control">
+                    <option value="ace/mode/python">Python</option>
+                    <option value="ace/mode/javascript">JavaScript</option>
+                    <option value="ace/mode/java">Java</option>
+                    <option value="ace/mode/csharp">C#</option>
+                    <option value="ace/mode/ruby">Ruby</option>
+                    <option value="ace/mode/php">PHP</option>
+                    <option value="ace/mode/markdown">Markdown</option>
+                </select>
+                <select id="font-size-selector" class="form-control">
+                    <option value="12px">12px</option>
+                    <option value="14px">14px</option>
+                    <option value="16px">16px</option>
+                    <option value="18px">18px</option>
+                    <option value="20px">20px</option>
+                    <option value="24px">24px</option>
+                    <option value="28px">28px</option>
+                </select>
+            </div>
+        </form>
+    </div>
+    <div th:replace="~{base :: footer}"></div>
+    <script th:src="@{/js/editor.js}"></script>
+</body>
+</html>

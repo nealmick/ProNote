@@ -1,0 +1,31 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login</title>
+    <th:block th:replace="~{base :: head}"></th:block>
+</head>
+<body>
+    <div th:replace="~{base :: header}"></div>
+    <div class="container" style="margin-top: 18vh">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body text-center" style="padding-top: 50px; padding-bottom: 50px">
+                        <center>
+                            <h2 class="mb-2" style="color: #333 !important">Welcome to Pro Note!</h2>
+                            <hr />
+                        </center>
+                        <a href="/oauth2/authorization/google" class="btn-lg btn btn-dark mb-4 mt-3"><i class="fab fa-google"></i> Login with Google</a>
+                        <br />
+                        <a href="/oauth2/authorization/azure" class="btn-lg btn btn-dark mb-4"><i class="fa-brands fa-windows"></i> Login with Microsoft</a>
+                        <br />
+                        <a href="/oauth2/authorization/github" class="btn-lg btn btn-dark mb-4"><i class="fab fa-github"></i> Login with GitHub</a>
+                        <br />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="~{base :: footer}"></div>
+</body>
+</html>

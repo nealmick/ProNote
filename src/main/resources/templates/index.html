@@ -1,0 +1,57 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Welcome to Pro Note</title>
+    <th:block th:replace="~{base :: head}"></th:block>
+</head>
+<body>
+    <div th:replace="~{base :: header}"></div>
+    <div class="container mt-4">
+        <div class="jumbotron" style="background-color: var(--background-color); margin-top: 12vh; padding: 0;">
+            <h1 class="display-4">Welcome to Pro Note!</h1>
+            <p class="lead">Pro Note is a simple and intuitive note-taking application that helps you stay organized and productive.</p>
+            <p>With Pro Note, you can easily create, edit, and manage your notes from any device.</p>
+            <th:block th:if="${isAuthenticated}">
+                <a class="btn btn-primary btn-lg" href="/notes" role="button">Dashboard</a>
+
+            </th:block>
+            <th:block th:unless="${isAuthenticated}">
+                <a class="btn btn-primary btn-lg" href="/login" role="button">Create Account</a>
+
+            </th:block>
+        </div>
+        <div class="row">
+            <div class="col-lg-6" style="padding-right: 35px; margin-top: 30px">
+                <h3><i class="fa-light fa-inbox-full"></i> Organize Your Thoughts</h3>
+                <hr style="background-color: var(--text-color)" />
+                <img src="https://i.imgur.com/5MDUNXw.png" style="width: 100%; border-radius: 10px" />
+            </div>
+            <div class="col-lg-6" style="padding-right: 35px; margin-top: 30px">
+                <h3><i class="fa-regular fa-code"></i> Write in any syntax or language</h3>
+                <hr style="background-color: var(--text-color)" />
+                <img src="https://i.imgur.com/w92Gaxz.png" style="width: 100%; border-radius: 10px" />
+            </div>
+            <div class="col-lg-6" style="padding-right: 35px; margin-top: 30px">
+                <h3><i class="fa-regular fa-sparkles"></i> Multiple editor themes</h3>
+                <hr style="background-color: var(--text-color)" />
+                <img src="https://i.imgur.com/DrjLKVG.png" style="width: 100%; border-radius: 10px" />
+            </div>
+            <div class="col-lg-6" style="padding-right: 35px; margin-top: 30px">
+                <h3><i class="fa-solid fa-magnifying-glass"></i> Easily search your notes</h3>
+                <hr style="background-color: var(--text-color)" />
+                <img src="https://i.imgur.com/JfgLUYn.png" style="width: 100%; border-radius: 10px" />
+            </div>
+        </div>
+        <hr style="margin-top: 5vh; background-color: var(--text-color)" />
+        <th:block th:if="${isAuthenticated}">
+            <center><a style="margin-top: 1vh; margin-bottom: 15vh" class="btn btn-primary btn-lg" href="/notes" role="button">View Notes</a></center>
+
+        </th:block>
+        <th:block th:unless="${isAuthenticated}">
+            <center><a style="margin-top: 1vh; margin-bottom: 15vh" class="btn btn-primary btn-lg" href="/login" role="button">Get Started</a></center>
+
+        </th:block>
+    </div>
+    <div th:replace="~{base :: footer}"></div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Notes</title>
+    <th:block th:replace="~{base :: head}"></th:block>
+</head>
+<body>
+    <div th:replace="~{base :: header}"></div>
+    <div class="container mt-4">
+        <h1 style="margin-top: 13vh">Notes</h1>
+        <div class="d-flex justify-content-between mb-3">
+            <a href="/notes/new" class="btn btn-primary mt-2">Create Note</a>
+            <form th:action="@{/notes/search}" method="get" class="form-inline">
+                <div class="input-group mt-2">
+                    <input type="text" class="form-control" name="searchTerm" th:value="${searchTerm}" placeholder="Search notes..." style="margin-left: 5px" />
+                    <div class="input-group-append"><button class="btn btn-primary" type="submit">Search</button></div>
+                </div>
+            </form>
+        </div>
+        <div th:if="${not #lists.isEmpty(notes)}">
+            <table class="table table-striped">
+                <thead>
+                    <tr><th>Title</th><th class="note-content">Content</th><th>Created At</th><th>Actions</th></tr>
+                </thead>
+                <tbody>
+                    <tr class="clickable-row" th:each="note : ${notes}">
+                        <td th:onclick="'window.location.href=\'/notes/' + ${note.id} + '/edit\''">
+                            <span th:text="${note.title}" ></span>
+                        </td>
+                        <td class="note-content" th:onclick="'window.location.href=\'/notes/' + ${note.id} + '/edit\''">
+                            <span th:text="${#strings.abbreviate(note.content, 30)}" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"></span>
+                        </td>
+                        <td th:onclick="'window.location.href=\'/notes/' + ${note.id} + '/edit\''">
+                            <span th:text="${#temporals.format(note.createdAt, 'yyyy-MM-dd HH:mm')}" class=""></span>
+                        </td>
+                        <td>
+                            <a th:href="@{/notes/{id}/edit(id=${note.id})}" class="btn btn-sm btn-primary mr-2 mb-1">Edit</a>
+                            <form th:action="@{/notes/{id}/delete(id=${note.id})}" method="post" class="d-inline">
+                                <button type="submit" class="btn btn-sm btn-danger mb-1" onclick="return confirm('Are you sure you want to delete this note?')">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div th:unless="${not #lists.isEmpty(notes)}">
+                <hr class="mt-8" style="margin-top: 35px; background-color: var(--text-color);" />
+                <h1 style="max-width: 600px">You have no notes. Click <a href="/notes/new">here</a> to create your first note!</h1>
+            </div>
+            <div th:unless="${#lists.isEmpty(notes)}" class="d-flex justify-content-center">
+                <nav aria-label="Page navigation" th:if="${totalPages > 0}">
+                    <ul class="pagination">
+                        <li class="page-item" th:classappend="${currentPage == 0 ? 'disabled' : ''}"><a class="page-link" th:href="@{/notes(page=${currentPage - 1})}">Back</a></li>
+                        <li th:each="i : ${#numbers.sequence(0, totalPages - 1)}" th:classappend="${i == currentPage ? 'active' : ''}" class="page-item"><a class="page-link" th:href="@{/notes(page=${i})}" th:text="${i + 1}"></a></li>
+                        <li class="page-item" th:classappend="${currentPage + 1 >= totalPages ? 'disabled' : ''}"><a class="page-link" th:href="@{/notes(page=${currentPage + 1})}">Next</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <button class="btn btn-secondary fixed-bottom-right" onclick="toggleTheme()"><i class="fas fa-moon" id="theme-icon"></i></button>
+    </div>
+    <div th:replace="~{base :: footer}"></div>
+</body>
+</html>
